@@ -105,9 +105,6 @@ td.correct {
   text-align: center;
 }
 
-@media (max-width: 40rem) {
-  table {
-    display: block;
-    overflow-x: auto;
-  }
+.table-wrap {
+  overflow-x: auto;
 }

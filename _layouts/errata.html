@@ -3,10 +3,12 @@ layout: default
 ---
 {% assign data = site.data.errata[page.slug] %}
 
-<h1>{{ data.book.title }} 正誤表</h1>
+{% if data %}
+<h1>{{ data.book.title | escape }} 正誤表</h1>
 
 <h2 id="editions">刊行情報</h2>
 
+<div class="table-wrap">
 <table>
   <caption>表 1. 刊行済みの版の一覧．</caption>
   <thead>
@@ -20,16 +22,18 @@ layout: default
     {% for edition in data.editions %}
     <tr>
       <th scope="row">{% include edition-label.html n=edition.edition %}</th>
-      <td>{{ edition.date }}</td>
-      <td>{{ edition.event }}</td>
+      <td>{{ edition.date | escape }}</td>
+      <td>{{ edition.event | escape }}</td>
     </tr>
     {% endfor %}
   </tbody>
 </table>
+</div>
 
 <h2 id="errata">正誤一覧</h2>
 
 {% if data.errata and data.errata.size > 0 %}
+<div class="table-wrap">
 <table>
   <caption>表 2. 正誤の一覧．「修正版」は誤りを本文へ反映済みの版を示す．</caption>
   <thead>
@@ -46,19 +50,25 @@ layout: default
   <tbody>
     {% for erratum in data.errata %}
     <tr>
-      <th scope="row">p.{{ erratum.page }}</th>
-      <td>{{ erratum.location }}</td>
-      <td class="wrong">{{ erratum.wrong }}</td>
-      <td class="correct">{{ erratum.correct }}</td>
+      <th scope="row">p.{{ erratum.page | escape }}</th>
+      <td>{{ erratum.location | escape }}</td>
+      <td class="wrong">{{ erratum.wrong | escape }}</td>
+      <td class="correct">{{ erratum.correct | escape }}</td>
       <td>{% for n in erratum.applies_to %}{% include edition-label.html n=n %}{% unless forloop.last %}・{% endunless %}{% endfor %}</td>
       <td>{% if erratum.fixed_in %}{% include edition-label.html n=erratum.fixed_in %}{% else %}未反映{% endif %}</td>
-      <td>{{ erratum.note }}</td>
+      <td>{{ erratum.note | escape }}</td>
     </tr>
     {% endfor %}
   </tbody>
 </table>
+</div>
 {% else %}
 <p>現在，確認済みの正誤はありません．</p>
+{% endif %}
+{% else %}
+<h1>{{ page.title | escape }} 正誤表</h1>
+
+<p>このページは準備中です．しばらくお待ちください．</p>
 {% endif %}
 
 <h2 id="report">誤りを見つけたら</h2>

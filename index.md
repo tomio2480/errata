@@ -14,8 +14,8 @@ title: 一覧
 <ul class="book-list">
 {% for book in site.data.books %}
   <li>
-    <a href="{{ '/books/' | append: book.slug | append: '/' | relative_url }}">{{ book.title }}</a>
-    （正誤 {{ book.errata_count }} 件）
+    <a href="{{ '/books/' | append: book.slug | append: '/' | relative_url }}">{{ book.title | escape }}</a>
+    （正誤 {{ book.errata_count | default: 0 }} 件）
   </li>
 {% endfor %}
 </ul>
