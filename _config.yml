@@ -1,0 +1,12 @@
+title: 技術系同人誌 正誤表
+description: 西原翔太（@tomio2480）が頒布した技術系同人誌の正誤表
+lang: ja
+url: "https://tomio2480.github.io"
+baseurl: "/errata"
+
+exclude:
+  - README.md
+  - ACCESSIBILITY.md
+  - vendor
+  - Gemfile
+  - Gemfile.lock

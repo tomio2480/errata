@@ -1,0 +1,113 @@
+:root {
+  --color-text: #1a1a1a;
+  --color-bg: #ffffff;
+  --color-accent: #0550ae;
+  --color-border: #d0d7de;
+  --color-header-bg: #f6f8fa;
+  --color-wrong: #82071e;
+  --color-correct: #055d20;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: var(--color-text);
+  background: var(--color-bg);
+  font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic",
+    "Meiryo", sans-serif;
+  line-height: 1.8;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--color-bg);
+  padding: 0.5em 1em;
+}
+
+.skip-link:focus {
+  left: 0;
+  z-index: 10;
+}
+
+.site-header {
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-header-bg);
+  padding: 0.75em 1rem;
+}
+
+.site-title {
+  color: var(--color-text);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.site-title:hover,
+.site-title:focus {
+  text-decoration: underline;
+}
+
+main {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 1rem 1rem 3rem;
+}
+
+a {
+  color: var(--color-accent);
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+  font-size: 0.95rem;
+}
+
+caption {
+  caption-side: bottom;
+  text-align: left;
+  font-size: 0.85rem;
+  padding-top: 0.5em;
+}
+
+th,
+td {
+  border: 1px solid var(--color-border);
+  padding: 0.5em 0.75em;
+  text-align: left;
+  vertical-align: top;
+}
+
+thead th {
+  background: var(--color-header-bg);
+}
+
+td.wrong {
+  color: var(--color-wrong);
+}
+
+td.correct {
+  color: var(--color-correct);
+}
+
+.book-list li {
+  margin: 0.5em 0;
+}
+
+.site-footer {
+  border-top: 1px solid var(--color-border);
+  padding: 1em 1rem;
+  text-align: center;
+}
+
+@media (max-width: 40rem) {
+  table {
+    display: block;
+    overflow-x: auto;
+  }
+}

@@ -1,0 +1,71 @@
+---
+layout: default
+---
+{% assign data = site.data.errata[page.slug] %}
+
+<h1>{{ data.book.title }} 正誤表</h1>
+
+<h2 id="editions">刊行情報</h2>
+
+<table>
+  <caption>表 1. 刊行済みの版の一覧．</caption>
+  <thead>
+    <tr>
+      <th scope="col">版</th>
+      <th scope="col">頒布日</th>
+      <th scope="col">頒布イベント</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for edition in data.editions %}
+    <tr>
+      <th scope="row">{% include edition-label.html n=edition.edition %}</th>
+      <td>{{ edition.date }}</td>
+      <td>{{ edition.event }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<h2 id="errata">正誤一覧</h2>
+
+{% if data.errata and data.errata.size > 0 %}
+<table>
+  <caption>表 2. 正誤の一覧．「修正版」は誤りを本文へ反映済みの版を示す．</caption>
+  <thead>
+    <tr>
+      <th scope="col">ページ</th>
+      <th scope="col">位置</th>
+      <th scope="col">誤</th>
+      <th scope="col">正</th>
+      <th scope="col">該当版</th>
+      <th scope="col">修正版</th>
+      <th scope="col">補足</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for erratum in data.errata %}
+    <tr>
+      <th scope="row">p.{{ erratum.page }}</th>
+      <td>{{ erratum.location }}</td>
+      <td class="wrong">{{ erratum.wrong }}</td>
+      <td class="correct">{{ erratum.correct }}</td>
+      <td>{% for n in erratum.applies_to %}{% include edition-label.html n=n %}{% unless forloop.last %}・{% endunless %}{% endfor %}</td>
+      <td>{% if erratum.fixed_in %}{% include edition-label.html n=erratum.fixed_in %}{% else %}未反映{% endif %}</td>
+      <td>{{ erratum.note }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>現在，確認済みの正誤はありません．</p>
+{% endif %}
+
+<h2 id="report">誤りを見つけたら</h2>
+
+<p>
+  <a href="https://github.com/tomio2480/errata/issues/new/choose">正誤報告フォーム</a>
+  からお知らせください．内容を確認のうえ，本ページへ反映します．
+</p>
+
+<p><a href="{{ '/' | relative_url }}">一覧へ戻る</a></p>

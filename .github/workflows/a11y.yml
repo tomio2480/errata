@@ -1,0 +1,50 @@
+name: A11y Check
+
+# サイトを Jekyll でビルドし，pa11y（WCAG2AA）で自動検査する．
+# 検査対象はトップページと books/ 配下の全ページ．
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pa11y:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build site
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: .
+          destination: ./_site
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Serve and run pa11y
+        run: |
+          mkdir -p serve
+          cp -r _site serve/errata
+          npx --yes http-server serve -p 8080 --silent &
+          sleep 3
+          URLS="http://localhost:8080/errata/"
+          if [ -d _site/books ]; then
+            for f in $(find _site/books -name index.html); do
+              rel="${f#_site/}"
+              URLS="$URLS http://localhost:8080/errata/${rel%index.html}"
+            done
+          fi
+          echo "checking: $URLS"
+          npx --yes pa11y-ci $URLS

@@ -1,0 +1,57 @@
+# 正誤報告フォーム．書名の選択肢は errata-ops の収集処理が自動更新する
+name: 正誤の報告
+description: 同人誌の誤りを見つけたら，このフォームからお知らせください
+title: "[正誤報告] "
+labels: ["正誤報告"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ご報告ありがとうございます．内容を確認のうえ，正誤表へ反映します．
+  - type: dropdown
+    id: book
+    attributes:
+      label: 書名
+      description: 誤りを見つけた本を選んでください
+      options:
+        - （現在受付中の書籍はありません）
+    validations:
+      required: true
+  - type: input
+    id: edition
+    attributes:
+      label: 版
+      description: お持ちの本の版（奥付に記載）
+      placeholder: 例：初版
+    validations:
+      required: true
+  - type: input
+    id: page
+    attributes:
+      label: 該当ページ
+      placeholder: 例：12
+    validations:
+      required: true
+  - type: input
+    id: location
+    attributes:
+      label: ページ内の位置
+      description: 行・図表番号など，おおよそで構いません
+      placeholder: 例：3 行目
+  - type: textarea
+    id: wrong
+    attributes:
+      label: 誤（現在の記述）
+    validations:
+      required: true
+  - type: textarea
+    id: correct
+    attributes:
+      label: 正（正しいと思われる内容）
+    validations:
+      required: true
+  - type: textarea
+    id: note
+    attributes:
+      label: 補足
+      description: その他，伝えておきたいことがあれば
