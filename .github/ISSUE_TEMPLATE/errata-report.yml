@@ -14,7 +14,7 @@ body:
       label: "書名"
       description: "誤りを見つけた本を選んでください"
       options:
-        - "（現在受付中の書籍はありません）"
+        - "電子工作基礎入門Ⅰ"
     validations:
       required: true
   - type: "input"
