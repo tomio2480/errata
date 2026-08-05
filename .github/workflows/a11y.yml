@@ -27,7 +27,7 @@ jobs:
 
       - name: Build site
         # actions/jekyll-build-pages v1.0.9
-        uses: actions/jekyll-build-pages@e4ef22193c23ea849fc3fea6dbce69da1ee65b6d
+        uses: actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697
         with:
           source: .
           destination: ./_site
